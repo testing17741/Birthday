@@ -125,8 +125,8 @@
             right: 15px;
             width: 40px;
             height: 40px;
-            background-color: #ffffff; /* White button */
-            color: #000000; /* Black icon */
+            background-color: white; /* White background in light mode */
+            color: black; /* Black icon */
             border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
@@ -137,6 +137,11 @@
             font-size: 18px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        [data-theme="dark"] .dark-mode-toggle {
+            background-color: black; /* Black background in dark mode */
+            color: white; /* White icon */
         }
 
         .dark-mode-toggle:hover {
@@ -260,10 +265,16 @@
             // Display Random Dua with Name
             const duas = [
                 "May Allah bless [name] with health and happiness.",
-                "May [name]'s days be filled with barakah and light.",
-                "May Allah guide [name] to His straight path.",
-                "May [name]'s year be full of joy and blessings.",
-                "May Allah protect [name] from harm and grant success."
+                "May [name]'s days be filled with barakah and joy.",
+                "O Allah, protect [name] from harm and grant success.",
+                "May [name] always walk in the light of Islam.",
+                "May Allah grant [name] wisdom and peace.",
+                "O Allah, grant [name] prosperity in this life and the hereafter.",
+                "May [name] be surrounded by love and protection.",
+                "O Allah, grant [name] patience in every trial.",
+                "May [name] achieve all their dreams with Your help.",
+                "O Allah, forgive [name]'s sins and guide them on the right path.",
+                "May [name] always find peace in Your remembrance."
             ];
             const randomDua = duas[Math.floor(Math.random() * duas.length)].replace("[name]", name);
             document.getElementById("dua").innerText = randomDua;
