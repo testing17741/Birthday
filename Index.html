@@ -8,7 +8,7 @@
         :root {
             /* Light Mode Colors */
             --bg-color: #ffffff;
-            --text-color: #0000FF; /* Always blue text */
+            --text-color: #ADD8E6; /* Light blue text */
             --section-bg: #ffffff;
             --button-bg: #00796b; /* Always green button */
             --button-text: #ffffff;
@@ -18,7 +18,7 @@
 
             /* Dark Mode Colors */
             --bg-color-dark: #121212;
-            --text-color-dark: #0000FF; /* Always blue text */
+            --text-color-dark: #ADD8E6; /* Light blue text */
             --section-bg-dark: #1c1c1c;
             --button-bg-dark: #00796b; /* Always green button */
             --button-text-dark: #ffffff;
@@ -261,14 +261,30 @@
                 `May Allah grant you, ${name}, wisdom and happiness.`,
                 `May Allah forgive your sins, ${name}, and grant you peace of mind.`,
                 `May Allah make all your dreams and wishes come true, ${name}.`,
-                `May your heart always be filled with happiness and light, ${name}.`
+                `May your heart always be filled with happiness and light, ${name}.`,
+                `May Allah grant you strength and patience, ${name}, in every trial.`,
+                `May your life always be filled with joy and peace, ${name}.`,
+                `May Allah protect you from harm, ${name}, and guide you in all that you do.`,
+                `May Allah always keep you on the path of righteousness, ${name}.`,
+                `May you be surrounded by love and light, ${name}.`,
+                `May Allah bless you, ${name}, with endless blessings and mercy.`,
+                `May you be a source of inspiration to those around you, ${name}.`,
+                `May Allah’s blessings always shine upon you, ${name}.`,
+                `May you experience success in this life and the next, ${name}.`,
+                `May your faith always be strong, ${name}, and your heart always be content.`,
+                `May Allah protect your family and loved ones, ${name}.`,
+                `May Allah grant you peace and serenity, ${name}, in every moment.`,
+                `May you continue to grow in knowledge and faith, ${name}.`,
+                `May your days be filled with blessings, ${name}, now and always.`,
+                `May you always find joy in the simple things, ${name}.`
             ];
 
-            document.getElementById("dua").innerText = duas[Math.floor(Math.random() * duas.length)];
+            const randomDua = duas[Math.floor(Math.random() * duas.length)];
+            document.getElementById("dua").innerText = randomDua;
 
-            // Countdown Logic
+            // Countdown logic
             const birthday = new Date(dob);
-            if (new Date() > birthday) birthday.setFullYear(new Date().getFullYear() + 1);
+            birthday.setFullYear(new Date().getFullYear() + 1);
 
             setInterval(function() {
                 const diff = birthday - new Date();
