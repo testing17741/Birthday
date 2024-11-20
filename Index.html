@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Birthday Wishes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .form-section, .countdown-section, .duas-section, .support-section {
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: calc(100% - 20px);
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #005f56;
+        }
+
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        #dua {
+            font-style: italic;
+            color: #00796b;
+        }
+
+        footer {
+            margin-top: 20px;
+            background-color: #00796b;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-section, .countdown-section, .duas-section, .support-section {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .form-section input, button {
+                font-size: 14px;
+            }
+
+            #countdown {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Audio with Autoplay -->
+    <audio id="birthdaySong" autoplay loop muted>
+        <!-- Update the path to your local audio file -->
+        <source src="birthday_song.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="container">
+        <header>
+            <h1>Islamic Birthday Wishes</h1>
+            <p>Made by Zainuddin Chaudhary</p>
+        </header>
+
+        <!-- Birthday Input Form -->
+        <section class="form-section">
+            <form id="birthdayForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+                
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+            <h2>Next Birthday Countdown</h2>
+            <div id="countdown">00:00:00</div>
+        </section>
+
+        <!-- Duas Shuffle -->
+        <section class="duas-section">
+            <h2>Special Duas for You</h2>
+            <p id="dua"></p>
+        </section>
+
+        <!-- Support Section -->
+        <section class="support-section">
+            <h2>Support</h2>
+            <p>If you have any issues, please contact us via WhatsApp: <a href="https://wa.me/9152667967">9152667967</a></p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Copyright © CHAUDHARY TECH 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Countdown Timer and Duas Functionality
+        document.getElementById("birthdayForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const dob = new Date(document.getElementById("dob").value);
+            const now = new Date();
+            const nextBirthday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+
+            if (nextBirthday < now) {
+                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+
+            // Start Countdown
+            const countdownInterval = setInterval(() => {
+                const diff = nextBirthday - new Date();
+                if (diff <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerText = "Happy Birthday!";
+                } else {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                    const seconds = Math.floor((diff / 1000) % 60);
+
+                    document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+
+            // Display Random Dua
+            const duas = [
+                "May Allah bless you with health and happiness.",
+                "May your days be filled with barakah and light.",
+                "May Allah guide you to His straight path.",
+                "May your year be full of joy and blessings.",
+                "May Allah protect you from harm and guide you always.",
+                "May your heart be full of peace and your soul be content.",
+                "May you be blessed with prosperity and success.",
+                "May your life be filled with love and kindness."
+            ];
+
+            const randomDua = duas[Math.floor(Math.random() * duas.length)];
+            document.getElementById("dua").innerText = randomDua;
+        });
+
+    </script>
+</body>
+</html>
