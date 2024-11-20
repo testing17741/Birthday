@@ -125,9 +125,9 @@
             right: 15px;
             width: 40px;
             height: 40px;
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
+            background-color: #ffffff; /* White button */
+            color: #333333; /* Icon color */
+            border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -135,15 +135,16 @@
             cursor: pointer;
             z-index: 1000;
             font-size: 18px;
-            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .dark-mode-toggle:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .dark-mode-toggle i {
             pointer-events: none;
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: #005f56;
         }
 
         /* Responsive Design for Mobile */
