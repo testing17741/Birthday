@@ -22,15 +22,15 @@
             /* Dark Mode Colors */
             --bg-color-dark: #121212;
             --text-color-dark: #e0e0e0;
-            --header-bg-dark: #00796b; /* Green for dark theme header */
+            --header-bg-dark: #121212; /* Dark background for header */
             --header-text-dark: #ffffff;
             --section-bg-dark: #1c1c1c;
-            --button-bg-dark: #00796b; /* Green for dark theme button */
+            --button-bg-dark: #121212; /* Dark background for button */
             --button-text-dark: #ffffff;
             --dua-color-dark: #80cbc4;
             --input-bg-dark: #333333;
             --input-border-dark: #444444;
-            --footer-bg-dark: #00796b; /* Green for dark theme footer */
+            --footer-bg-dark: #121212; /* Dark background for footer */
         }
 
         body {
@@ -249,33 +249,36 @@
         <section class="form-section">
             <form id="birthdayForm">
                 <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="dob">Your Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required>
+                <input type="text" id="name" placeholder="Enter your name" required>
+                
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+
                 <button type="submit">Submit</button>
             </form>
         </section>
 
-        <!-- Countdown -->
+        <!-- Countdown Timer -->
         <section class="countdown-section">
-            <h2>Next Birthday Countdown:</h2>
-            <p id="countdown">Loading...</p>
+            <h2>Next Birthday Countdown</h2>
+            <div id="countdown">00:00:00</div>
         </section>
 
-        <!-- Dua Section -->
+        <!-- Duas Section -->
         <section class="duas-section">
-            <h2>Special Dua:</h2>
-            <p id="dua">Loading Dua...</p>
+            <h2>Special Duas for You</h2>
+            <p id="dua"></p>
         </section>
 
         <!-- Support Section -->
         <section class="support-section">
-            <p>For any issues, contact support: <a href="tel:+9152667967">+91 5266 7967</a></p>
+            <h2>Support</h2>
+            <p>If you have any issues, please contact us via WhatsApp: <a href="https://wa.me/9152667967">9152667967</a></p>
         </section>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2024 CHAUDHARY TECH</p>
+            <p>Copyright © CHAUDHARY TECH 2024</p>
         </footer>
     </div>
 
