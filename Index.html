@@ -5,27 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Birthday Wishes</title>
     <style>
+        :root {
+            /* Light mode colors */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #00796b;
+            --header-text: #ffffff;
+            --section-bg: #ffffff;
+            --button-bg: #00796b;
+            --button-text: #ffffff;
+            --dua-color: #00796b;
+
+            /* Dark mode colors */
+            --bg-color-dark: #121212;
+            --text-color-dark: #e0e0e0;
+            --header-bg-dark: #1e1e1e;
+            --header-text-dark: #e0e0e0;
+            --section-bg-dark: #1c1c1c;
+            --button-bg-dark: #333333;
+            --button-text-dark: #ffffff;
+            --dua-color-dark: #80cbc4;
+        }
+
+        /* Default (light mode) styles */
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            color: #333;
             text-align: center;
-            position: relative;
-            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
-            background-color: #00796b;
-            color: white;
+            background-color: var(--header-bg);
+            color: var(--header-text);
             padding: 20px;
             margin-bottom: 30px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
         }
 
         .container {
@@ -34,11 +55,12 @@
 
         .form-section, .countdown-section, .duas-section, .support-section {
             margin: 20px auto;
-            background: white;
+            background: var(--section-bg);
             padding: 20px;
             border-radius: 8px;
             max-width: 500px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
 
         .form-section input {
@@ -51,14 +73,15 @@
         }
 
         button {
-            background-color: #00796b;
-            color: white;
+            background-color: var(--button-bg);
+            color: var(--button-text);
             border: none;
             padding: 15px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             width: calc(100% - 20px);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         button:hover {
@@ -72,16 +95,28 @@
 
         #dua {
             font-style: italic;
-            color: #00796b;
+            color: var(--dua-color);
+            transition: color 0.3s;
         }
 
         footer {
             margin-top: 20px;
-            background-color: #00796b;
-            color: white;
+            background-color: var(--header-bg);
+            color: var(--header-text);
             padding: 10px;
             text-align: center;
-            font-size: 0.9rem;
+        }
+
+        /* Dark Mode Styles */
+        [data-theme="dark"] {
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --header-bg: var(--header-bg-dark);
+            --header-text: var(--header-text-dark);
+            --section-bg: var(--section-bg-dark);
+            --button-bg: var(--button-bg-dark);
+            --button-text: var(--button-text-dark);
+            --dua-color: var(--dua-color-dark);
         }
 
         /* Responsive Design for Mobile */
@@ -107,9 +142,25 @@
                 font-size: 0.8rem;
             }
         }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
     <!-- Background Audio -->
     <audio id="birthdaySong" autoplay loop muted>
         <source src="birthday_song.mp3" type="audio/mpeg">
@@ -210,7 +261,11 @@
             const audio = document.getElementById('birthdaySong');
             audio.muted = false; // Unmute the audio after the page loads
         });
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.dataset.theme = document.body.dataset.theme === "dark" ? "" : "dark";
+        }
     </script>
-    
 </body>
 </html>
