@@ -8,7 +8,7 @@
         :root {
             /* Light Mode Colors */
             --bg-color: #ffffff;
-            --text-color: #ADD8E6; /* Light blue text */
+            --text-color: #0000EE; /* URL-style blue text */
             --section-bg: #ffffff;
             --button-bg: #00796b; /* Always green button */
             --button-text: #ffffff;
@@ -18,7 +18,7 @@
 
             /* Dark Mode Colors */
             --bg-color-dark: #121212;
-            --text-color-dark: #ADD8E6; /* Light blue text */
+            --text-color-dark: #0000EE; /* URL-style blue text */
             --section-bg-dark: #1c1c1c;
             --button-bg-dark: #00796b; /* Always green button */
             --button-text-dark: #ffffff;
@@ -144,6 +144,12 @@
             pointer-events: none;
         }
 
+        /* Text Style like URL text */
+        a {
+            color: #0000EE; /* URL blue color */
+            text-decoration: underline;
+        }
+
         /* Responsive Design for Mobile */
         @media screen and (max-width: 600px) {
             header h1 {
@@ -262,11 +268,7 @@
                 `May Allah forgive your sins, ${name}, and grant you peace of mind.`,
                 `May Allah make all your dreams and wishes come true, ${name}.`,
                 `May your heart always be filled with happiness and light, ${name}.`,
-                `May Allah grant you strength and patience, ${name}, in every trial.`,
-                `May your life always be filled with joy and peace, ${name}.`,
-                `May Allah protect you from harm, ${name}, and guide you in all that you do.`,
-                `May Allah always keep you on the path of righteousness, ${name}.`,
-                `May you be surrounded by love and light, ${name}.`,
+                `May you always be surrounded by love and light, ${name}.`,
                 `May Allah bless you, ${name}, with endless blessings and mercy.`,
                 `May you be a source of inspiration to those around you, ${name}.`,
                 `May Allah’s blessings always shine upon you, ${name}.`,
