@@ -164,7 +164,7 @@
         document.getElementById("birthdayForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
-            const name = document.getElementById("name").value;
+            const name = document.getElementById("name").value.trim();
             const dob = new Date(document.getElementById("dob").value);
             const now = new Date();
             const nextBirthday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
@@ -189,19 +189,19 @@
                 }
             }, 1000);
 
-            // Display Random Dua
+            // Display Random Dua with Name
             const duas = [
-                "May Allah bless you with health and happiness.",
-                "May your days be filled with barakah and light.",
-                "May Allah guide you to His straight path.",
-                "May your year be full of joy and blessings.",
-                "May Allah protect you from harm and guide you always.",
-                "May your heart be full of peace and your soul be content.",
-                "May you be blessed with prosperity and success.",
-                "May your life be filled with love and kindness."
+                "May Allah bless [name] with health and happiness.",
+                "May [name]'s days be filled with barakah and light.",
+                "May Allah guide [name] to His straight path.",
+                "May [name]'s year be full of joy and blessings.",
+                "May Allah protect [name] from harm and guide them always.",
+                "May [name]'s heart be full of peace and their soul be content.",
+                "May [name] be blessed with prosperity and success.",
+                "May [name]'s life be filled with love and kindness."
             ];
 
-            const randomDua = duas[Math.floor(Math.random() * duas.length)];
+            const randomDua = duas[Math.floor(Math.random() * duas.length)].replace("[name]", name);
             document.getElementById("dua").innerText = randomDua;
         });
 
