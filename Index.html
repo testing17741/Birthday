@@ -6,7 +6,7 @@
     <title>Islamic Birthday Wishes</title>
     <style>
         :root {
-            /* Light mode colors */
+            /* Light Mode Colors */
             --bg-color: #ffffff;
             --text-color: #333333;
             --header-bg: #00796b;
@@ -15,8 +15,11 @@
             --button-bg: #00796b;
             --button-text: #ffffff;
             --dua-color: #00796b;
+            --input-bg: #f5f5f5;
+            --input-border: #ddd;
+            --footer-bg: #00796b;
 
-            /* Dark mode colors */
+            /* Dark Mode Colors */
             --bg-color-dark: #121212;
             --text-color-dark: #e0e0e0;
             --header-bg-dark: #1e1e1e;
@@ -25,6 +28,9 @@
             --button-bg-dark: #333333;
             --button-text-dark: #ffffff;
             --dua-color-dark: #80cbc4;
+            --input-bg-dark: #333333;
+            --input-border-dark: #444444;
+            --footer-bg-dark: #333333;
         }
 
         body {
@@ -42,6 +48,7 @@
             color: var(--header-text);
             padding: 20px;
             margin-bottom: 30px;
+            transition: background-color 0.3s;
         }
 
         header h1 {
@@ -66,9 +73,10 @@
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ddd;
+            border: 1px solid var(--input-border);
             border-radius: 5px;
             font-size: 16px;
+            background-color: var(--input-bg);
         }
 
         button {
@@ -100,7 +108,7 @@
 
         footer {
             margin-top: 20px;
-            background-color: var(--header-bg);
+            background-color: var(--footer-bg);
             color: var(--header-text);
             padding: 10px;
             text-align: center;
@@ -116,6 +124,9 @@
             --button-bg: var(--button-bg-dark);
             --button-text: var(--button-text-dark);
             --dua-color: var(--dua-color-dark);
+            --input-bg: var(--input-bg-dark);
+            --input-border: var(--input-border-dark);
+            --footer-bg: var(--footer-bg-dark);
         }
 
         /* Dark Mode Toggle Button */
@@ -125,8 +136,8 @@
             right: 15px;
             width: 40px;
             height: 40px;
-            background-color: white; /* White background in light mode */
-            color: black; /* Black icon */
+            background-color: white;
+            color: black;
             border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
@@ -140,8 +151,8 @@
         }
 
         [data-theme="dark"] .dark-mode-toggle {
-            background-color: black; /* Black background in dark mode */
-            color: white; /* White icon */
+            background-color: black;
+            color: white;
         }
 
         .dark-mode-toggle:hover {
@@ -214,7 +225,7 @@
             <div id="countdown">00:00:00</div>
         </section>
 
-        <!-- Duas Shuffle -->
+        <!-- Duas Section -->
         <section class="duas-section">
             <h2>Special Duas for You</h2>
             <p id="dua"></p>
@@ -254,51 +265,42 @@
                     document.getElementById("countdown").innerText = "Happy Birthday!";
                 } else {
                     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-                    const seconds = Math.floor((diff / 1000) % 60);
-
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
                     document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
                 }
             }, 1000);
 
-            // Display Random Dua with Name
+            // Display Duas with Name
             const duas = [
-                "May Allah bless [name] with health and happiness.",
-                "May [name]'s days be filled with barakah and joy.",
-                "O Allah, protect [name] from harm and grant success.",
-                "May [name] always walk in the light of Islam.",
-                "May Allah grant [name] wisdom and peace.",
-                "O Allah, grant [name] prosperity in this life and the hereafter.",
-                "May [name] be surrounded by love and protection.",
-                "O Allah, grant [name] patience in every trial.",
-                "May [name] achieve all their dreams with Your help.",
-                "O Allah, forgive [name]'s sins and guide them on the right path.",
-                "May [name] always find peace in Your remembrance."
+                `May Allah bless you, ${name}, with a long, prosperous, and healthy life.`,
+                `May this special day bring you, ${name}, success in this life and the hereafter.`,
+                `May Allah grant you, ${name}, wisdom and happiness.`,
+                `May Allah forgive your sins, ${name}, and grant you peace of mind.`,
+                `May Allah make all your dreams and wishes come true, ${name}.`,
+                `May you always be surrounded by love and blessings, ${name}.`,
+                `May you find peace and joy in every step you take, ${name}.`,
+                `May Allah bless your family and loved ones, ${name}.`,
+                `May you be granted success in every endeavor, ${name}.`,
+                `May Allah guide you, ${name}, to the right path.`,
+                `Ameen. May all your duas be accepted, ${name}.`
             ];
-            const randomDua = duas[Math.floor(Math.random() * duas.length)].replace("[name]", name);
-            document.getElementById("dua").innerText = randomDua;
+
+            document.getElementById("dua").innerText = duas[Math.floor(Math.random() * duas.length)];
         });
 
         // Dark Mode Toggle Function
         function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.getElementById("toggle-icon");
-
-            if (body.dataset.theme === "dark") {
-                body.dataset.theme = "";
-                icon.textContent = "🌙"; // Moon icon for light mode
+            const currentTheme = document.body.getAttribute("data-theme");
+            if (currentTheme === "dark") {
+                document.body.removeAttribute("data-theme");
+                document.getElementById("toggle-icon").textContent = "🌙"; // Moon icon
             } else {
-                body.dataset.theme = "dark";
-                icon.textContent = "☀️"; // Sun icon for dark mode
+                document.body.setAttribute("data-theme", "dark");
+                document.getElementById("toggle-icon").textContent = "🌞"; // Sun icon
             }
         }
-
-        // Ensure Audio Autoplay on Mobile
-        const audio = document.getElementById("birthdaySong");
-        document.addEventListener("click", () => {
-            if (audio.paused) audio.play();
-        });
     </script>
 </body>
 </html>
