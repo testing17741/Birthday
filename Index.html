@@ -27,7 +27,6 @@
             --dua-color-dark: #80cbc4;
         }
 
-        /* Default (light mode) styles */
         body {
             font-family: Arial, sans-serif;
             background-color: var(--bg-color);
@@ -119,6 +118,34 @@
             --dua-color: var(--dua-color-dark);
         }
 
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode-toggle i {
+            pointer-events: none;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #005f56;
+        }
+
         /* Responsive Design for Mobile */
         @media screen and (max-width: 600px) {
             header h1 {
@@ -142,27 +169,16 @@
                 font-size: 0.8rem;
             }
         }
-
-        .dark-mode-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            z-index: 1000;
-        }
     </style>
 </head>
 <body>
     <!-- Dark Mode Toggle Button -->
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i id="toggle-icon">🌙</i>
+    </button>
 
     <!-- Background Audio -->
-    <audio id="birthdaySong" autoplay loop muted>
+    <audio id="birthdaySong" autoplay loop>
         <source src="birthday_song.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -246,25 +262,24 @@
                 "May [name]'s days be filled with barakah and light.",
                 "May Allah guide [name] to His straight path.",
                 "May [name]'s year be full of joy and blessings.",
-                "May Allah protect [name] from harm and guide them always.",
-                "May [name]'s heart be full of peace and their soul be content.",
-                "May [name] be blessed with prosperity and success.",
-                "May [name]'s life be filled with love and kindness."
+                "May Allah protect [name] from harm and guide to success."
             ];
-
             const randomDua = duas[Math.floor(Math.random() * duas.length)].replace("[name]", name);
             document.getElementById("dua").innerText = randomDua;
         });
 
-        // Enable Audio After Page Load
-        window.addEventListener('load', function () {
-            const audio = document.getElementById('birthdaySong');
-            audio.muted = false; // Unmute the audio after the page loads
-        });
-
-        // Dark Mode Toggle
+        // Dark Mode Toggle Function
         function toggleDarkMode() {
-            document.body.dataset.theme = document.body.dataset.theme === "dark" ? "" : "dark";
+            const body = document.body;
+            const icon = document.getElementById("toggle-icon");
+
+            if (body.dataset.theme === "dark") {
+                body.dataset.theme = "";
+                icon.textContent = "🌙"; // Moon icon for light mode
+            } else {
+                body.dataset.theme = "dark";
+                icon.textContent = "☀️"; // Sun icon for dark mode
+            }
         }
     </script>
 </body>
