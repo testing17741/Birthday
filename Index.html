@@ -22,15 +22,15 @@
             /* Dark Mode Colors */
             --bg-color-dark: #121212;
             --text-color-dark: #e0e0e0;
-            --header-bg-dark: #1e1e1e;
-            --header-text-dark: #e0e0e0;
+            --header-bg-dark: #00796b; /* Green for dark theme header */
+            --header-text-dark: #ffffff;
             --section-bg-dark: #1c1c1c;
-            --button-bg-dark: #333333;
+            --button-bg-dark: #00796b; /* Green for dark theme button */
             --button-text-dark: #ffffff;
             --dua-color-dark: #80cbc4;
             --input-bg-dark: #333333;
             --input-border-dark: #444444;
-            --footer-bg-dark: #333333;
+            --footer-bg-dark: #00796b; /* Green for dark theme footer */
         }
 
         body {
@@ -49,6 +49,7 @@
             padding: 20px;
             margin-bottom: 30px;
             transition: background-color 0.3s;
+            animation: fadeIn 1s ease;
         }
 
         header h1 {
@@ -67,6 +68,7 @@
             max-width: 500px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
+            animation: slideIn 1s ease;
         }
 
         .form-section input {
@@ -89,6 +91,7 @@
             font-size: 16px;
             width: calc(100% - 20px);
             transition: background-color 0.3s, color 0.3s;
+            animation: bounceIn 1s ease;
         }
 
         button:hover {
@@ -112,6 +115,7 @@
             color: var(--header-text);
             padding: 10px;
             text-align: center;
+            animation: fadeIn 1s ease;
         }
 
         /* Dark Mode Styles */
@@ -186,6 +190,41 @@
                 font-size: 0.8rem;
             }
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -244,33 +283,24 @@
     </div>
 
     <script>
-        // Countdown Timer and Duas Functionality
-        document.getElementById("birthdayForm").addEventListener("submit", function (e) {
+        // Dark Mode Toggle Function
+        function toggleDarkMode() {
+            const currentTheme = document.body.getAttribute("data-theme");
+            if (currentTheme === "dark") {
+                document.body.removeAttribute("data-theme");
+                document.getElementById("toggle-icon").textContent = "🌙"; // Moon icon
+            } else {
+                document.body.setAttribute("data-theme", "dark");
+                document.getElementById("toggle-icon").textContent = "🌞"; // Sun icon
+            }
+        }
+
+        // Handle form submission and countdown logic
+        document.getElementById("birthdayForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
-            const name = document.getElementById("name").value.trim();
-            const dob = new Date(document.getElementById("dob").value);
-            const now = new Date();
-            const nextBirthday = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
-
-            if (nextBirthday < now) {
-                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
-            }
-
-            // Start Countdown
-            const countdownInterval = setInterval(() => {
-                const diff = nextBirthday - new Date();
-                if (diff <= 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById("countdown").innerText = "Happy Birthday!";
-                } else {
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                    document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                }
-            }, 1000);
+            const name = document.getElementById("name").value;
+            const dob = document.getElementById("dob").value;
 
             // Display Duas with Name
             const duas = [
@@ -288,19 +318,22 @@
             ];
 
             document.getElementById("dua").innerText = duas[Math.floor(Math.random() * duas.length)];
-        });
 
-        // Dark Mode Toggle Function
-        function toggleDarkMode() {
-            const currentTheme = document.body.getAttribute("data-theme");
-            if (currentTheme === "dark") {
-                document.body.removeAttribute("data-theme");
-                document.getElementById("toggle-icon").textContent = "🌙"; // Moon icon
-            } else {
-                document.body.setAttribute("data-theme", "dark");
-                document.getElementById("toggle-icon").textContent = "🌞"; // Sun icon
-            }
-        }
+            // Countdown Timer
+            setInterval(function() {
+                const birthday = new Date(dob);
+                birthday.setFullYear(new Date().getFullYear());
+                if (new Date() > birthday) birthday.setFullYear(new Date().getFullYear() + 1);
+
+                const diff = birthday - new Date();
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        });
     </script>
 </body>
 </html>
