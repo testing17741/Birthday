@@ -126,7 +126,7 @@
             width: 40px;
             height: 40px;
             background-color: #ffffff; /* White button */
-            color: #333333; /* Icon color */
+            color: #000000; /* Black icon */
             border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
@@ -263,7 +263,7 @@
                 "May [name]'s days be filled with barakah and light.",
                 "May Allah guide [name] to His straight path.",
                 "May [name]'s year be full of joy and blessings.",
-                "May Allah protect [name] from harm and guide to success."
+                "May Allah protect [name] from harm and grant success."
             ];
             const randomDua = duas[Math.floor(Math.random() * duas.length)].replace("[name]", name);
             document.getElementById("dua").innerText = randomDua;
@@ -282,6 +282,12 @@
                 icon.textContent = "☀️"; // Sun icon for dark mode
             }
         }
+
+        // Ensure Audio Autoplay on Mobile
+        const audio = document.getElementById("birthdaySong");
+        document.addEventListener("click", () => {
+            if (audio.paused) audio.play();
+        });
     </script>
 </body>
 </html>
