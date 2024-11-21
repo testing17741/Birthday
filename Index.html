@@ -185,6 +185,7 @@
     <button class="dark-mode-toggle" onclick="toggleDarkMode()">
         <i id="toggle-icon">🌙</i>
     </button>
+
     <!-- Background Audio -->
     <audio id="birthdaySong" autoplay loop>
         <source src="birthday_song.mp3" type="audio/mpeg">
@@ -267,9 +268,7 @@
             // Display Duas with Name
             const duas = [
                 `May Allah bless you, ${name}, with a long, prosperous, and healthy life. May your heart be filled with peace and your path always be guided. Ameen.`,
-                `May this special day bring you, ${name}, success in this life and the hereafter. May Allah ease all your difficulties and grant you blessings. Ameen.`,
-                `May Allah grant you, ${name}, wisdom and happiness. May your days be filled with joy, and your nights with tranquility. Ameen.`,
-                `May Allah forgive your sins, ${name}, and grant you the best of both worlds. May His mercy always guide you. Ameen.`,
+                `May this special day bring you, ${name}, success in this world and the hereafter. May Allah’s mercy always guide you. Ameen.`,
                 `May you always find joy, ${name}, in the simplest of things. May your heart be content and your soul at peace. Ameen.`,
                 `May Allah's protection always surround you, ${name}, and may He keep you safe from harm and evil. Ameen.`,
                 `May your life be filled with knowledge, ${name}, and may you always grow in understanding and wisdom. Ameen.`,
@@ -292,17 +291,20 @@
             const randomDua = duas[Math.floor(Math.random() * duas.length)];
             document.getElementById("dua").innerText = randomDua;
 
-            // Countdown logic
+            // Countdown logic (Mumbai Time)
             const birthday = new Date(dob);
             const currentYear = new Date().getFullYear();
+            const indiaOffset = 5.5 * 60; // Mumbai is UTC+5:30
 
-            // Set the next birthday to the current year or next year if the birthday has passed
+            // Adjust the birthday year to current or next year
             if (birthday.setFullYear(currentYear) < new Date()) {
                 birthday.setFullYear(currentYear + 1);
             }
 
             const countdownInterval = setInterval(function() {
-                const diff = birthday - new Date();
+                const indiaTime = new Date(new Date().getTime() + indiaOffset * 60000);
+                const diff = birthday - indiaTime;
+
                 if (diff <= 0) {
                     clearInterval(countdownInterval);
                     document.getElementById("countdown").innerText = "Happy Birthday!";
