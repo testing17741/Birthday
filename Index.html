@@ -103,8 +103,8 @@
 
         .dark-mode-toggle {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: var(--header-color);
             color: #ffffff;
             border: none;
@@ -172,6 +172,20 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* Dark Mode Styles */
+        body[data-theme="dark"] {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        body[data-theme="dark"] section {
+            background: var(--section-bg-dark);
+        }
+
+        body[data-theme="dark"] #dua {
+            color: var(--dua-color-dark);
+        }
     </style>
 </head>
 <body>
@@ -219,84 +233,57 @@
             const dob = new Date(document.getElementById("dob").value);
 
             const duas = [
-                `May Allah bless you, ${name}, with endless happiness and prosperity. 
-                May your life be filled with His mercy and guidance.`,
-                `May Allah guide you, ${name}, on the path of righteousness and success. 
-                May He grant you a long and healthy life.`,
-                `May Allah fill your heart, ${name}, with contentment and joy. 
-                May you find peace in every moment.`,
-                `May Allah forgive your sins, ${name}, and grant you the highest place in Jannah. 
-                May He shower His blessings upon you.`,
-                `May Allah protect you, ${name}, and your loved ones from every harm. 
-                May He strengthen your faith and resolve.`,
-                `May Allah grant you wisdom, ${name}, to make the best decisions in life. 
-                May He make your heart steadfast in faith.`,
-                `May Allah bless your efforts, ${name}, and make them fruitful. 
-                May He open doors of success for you in both worlds.`,
-                `May Allah’s mercy and blessings, ${name}, always surround you. 
-                May you be a source of positivity and light for others.`,
-                `May Allah grant you the strength, ${name}, to overcome every challenge. 
-                May He ease your difficulties and bring you peace.`,
-                `May Allah grant you barakah in your wealth and time, ${name}. 
-                May He always keep you under His care.`,
-                `May Allah make your life, ${name}, a reflection of His mercy. 
-                May He grant you countless blessings in this world and the next.`,
-                `May Allah protect your family, ${name}, and grant them health and happiness. 
-                May He make your bonds stronger with love and understanding.`,
-                `May Allah’s blessings, ${name}, illuminate your life with positivity. 
-                May He guide you on the straight path.`,
-                `May Allah bring joy and tranquility into your heart, ${name}. 
-                May every day of your life be filled with gratitude.`,
-                `May Allah bless you, ${name}, with success in your studies and career. 
-                May He make you a source of pride for your loved ones.`,
-                `May Allah make your dreams come true, ${name}, in the best way. 
-                May He always keep you close to Him.`,
-                `May Allah reward your kindness, ${name}, with His infinite mercy. 
-                May He multiply your good deeds and forgive your shortcomings.`,
-                `May Allah accept your duas, ${name}, and answer them in the best way. 
-                May He guide your steps towards Jannah.`,
-                `May Allah grant you a life of ease, ${name}, filled with countless blessings. 
-                May He make you grateful in every circumstance.`,
-                `May Allah make you successful, ${name}, in this world and the hereafter. 
-                May He keep you steadfast in your faith.`,
-                `May Allah’s blessings always be upon you, ${name}. 
-                May He grant you peace and satisfaction.`,
-                `May Allah protect you from the evil eye, ${name}, and all harm. 
-                May He guard your health and your loved ones.`,
-                `May Allah make you a means of guidance for others, ${name}. 
-                May He empower you to spread goodness wherever you go.`,
-                `May Allah always keep you in His protection, ${name}. 
-                May He grant you the strength to overcome every challenge with faith.`,
-                `May Allah grant you joy and peace, ${name}, in this world and the hereafter. 
-                May He make you among His righteous servants.`,
-                `May Allah’s mercy be upon you, ${name}, and may He always keep you close to Him. 
-                May He grant you endless happiness.`,
-                `May Allah’s light always shine upon you, ${name}. 
-                May He make every path you take one of success and happiness.`
+                `May Allah bless you, ${name}, with endless happiness and prosperity. May He grant you success in this life and the next. May your heart always find peace in His remembrance.`,
+                `May Allah grant you wisdom and understanding, ${name}. May He guide you to the straight path and protect you from harm. May your life be filled with joy and contentment.`,
+                `May Allah fill your heart, ${name}, with His love and mercy. May He make your path easy and bring you closer to Him every day. May you always be a source of light to others.`,
+                `May Allah grant you health, wealth, and happiness, ${name}. May you find success in your endeavors and may His protection be with you always. May you be surrounded by those who love and cherish you.`,
+                `May Allah bless your family with peace and harmony, ${name}. May He protect them from all harm and grant them His guidance. May your home be filled with joy and prosperity.`,
+                `May Allah grant you patience and strength, ${name}, in all your trials. May He ease your hardships and reward you with the best of this world and the next. May you always find comfort in His words.`,
+                `May Allah shower His mercy upon you, ${name}, and grant you a life of tranquility. May He guide your heart to be always content with His will. May you find peace in His remembrance.`,
+                `May Allah bless you with a long, healthy life, ${name}. May He keep you safe from harm and fill your life with His light. May your journey be filled with peace, prosperity, and joy.`,
+                `May Allah grant you a heart full of gratitude, ${name}. May you always find blessings in every moment. May He grant you success in every endeavor, big or small.`,
+                `May Allah’s mercy be with you, ${name}, in all your undertakings. May He make your life prosperous and full of peace. May you always remain on the path of righteousness.`,
+                `May Allah answer all your prayers, ${name}, and grant you the best of both worlds. May He protect you from every harm and bless you with unending peace. May you always remain steadfast in faith.`,
+                `May Allah grant you wisdom, ${name}, to navigate the challenges of life. May He give you the strength to stay true to your beliefs. May you always find success in His will.`,
+                `May Allah's protection surround you always, ${name}. May He guide you in all your endeavors and bless you with endless prosperity. May your faith in Him grow stronger with each passing day.`,
+                `May Allah fill your life with peace, love, and mercy, ${name}. May He guide you to success in this life and the hereafter. May you always find joy in His remembrance.`,
+                `May Allah bless you with strength, ${name}, in every trial you face. May He grant you success and open doors of opportunity for you. May your efforts be rewarded with abundant blessings.`,
+                `May Allah grant you joy, ${name}, in every moment of your life. May He protect you from hardship and bring you closer to His mercy. May you always be grateful for His countless blessings.`,
+                `May Allah’s light shine upon you, ${name}, and fill your heart with peace. May He keep you away from harm and guide you to righteousness. May your heart always find comfort in His presence.`,
+                `May Allah grant you ease and success in every aspect of your life, ${name}. May He grant you tranquility in your heart and steadfastness in your faith. May you always find happiness in His blessings.`,
+                `May Allah grant you a peaceful heart, ${name}. May He protect you from all worries and grant you contentment in every situation. May you always find comfort in His mercy.`,
+                `May Allah’s blessings be with you, ${name}, always. May He grant you health, wealth, and happiness in this world. May He guide you towards righteousness and protect you from all harm.`,
+                `May Allah grant you success in your studies, ${name}, and in all your endeavors. May He open doors of opportunities for you and bless you with knowledge. May you always find strength in Him.`,
+                `May Allah make your life easy, ${name}. May He remove every obstacle from your path and grant you success in everything you do. May your faith always be strong in His mercy.`
             ];
 
-            // Display the countdown
-            setInterval(function() {
+            const randomIndex = Math.floor(Math.random() * duas.length);
+            document.getElementById("dua").innerText = duas[randomIndex];
+
+            const nextBirthday = new Date(dob);
+            nextBirthday.setFullYear(new Date().getFullYear());
+
+            if (nextBirthday < new Date()) {
+                nextBirthday.setFullYear(new Date().getFullYear() + 1);
+            }
+
+            const countdownInterval = setInterval(() => {
                 const now = new Date();
-                let nextBirthday = new Date(dob);
-                nextBirthday.setFullYear(now.getFullYear());
-                if (nextBirthday < now) nextBirthday.setFullYear(now.getFullYear() + 1);
-                const diff = nextBirthday - now;
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const timeDifference = nextBirthday - now;
+
+                if (timeDifference <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerText = "Happy Birthday!";
+                    return;
+                }
+
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
                 document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
             }, 1000);
-
-            // Display a dua
-            document.getElementById("dua").innerText = duas[Math.floor(Math.random() * duas.length)];
-
-            // Fix audio play
-            document.addEventListener("click", function() {
-                const audio = document.getElementById("birthdaySong");
-                if (audio.paused) audio.play();
-            });
         });
     </script>
 </body>
