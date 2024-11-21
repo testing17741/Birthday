@@ -3,86 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islamic Birthday Wishes and Countdown</title>
+    <title>Islamic Birthday Wishes And Countdown</title>
     <style>
         :root {
-            --bg-color: #f0f4f7;
-            --text-color: #333333;
+            /* Light Mode Colors */
+            --bg-color: #ffffff;
+            --text-color: #808080; /* Gray text */
             --section-bg: #ffffff;
-            --button-bg: #00796b;
+            --button-bg: #00796b; /* Always green button */
             --button-text: #ffffff;
-            --dua-color: #00695c;
-            --header-color: #004d40;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            --dua-color: #00796b;
+            --input-bg: #f5f5f5;
+            --input-border: #ddd;
 
             /* Dark Mode Colors */
             --bg-color-dark: #121212;
-            --text-color-dark: #cccccc;
-            --section-bg-dark: #1e1e1e;
+            --text-color-dark: #808080; /* Gray text */
+            --section-bg-dark: #1c1c1c;
+            --button-bg-dark: #00796b; /* Always green button */
+            --button-text-dark: #ffffff;
             --dua-color-dark: #80cbc4;
+            --input-bg-dark: #333333;
+            --input-border-dark: #444444;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            transition: all 0.3s ease-in-out;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
-            background-color: var(--header-color);
-            color: #ffffff;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--box-shadow);
+            background-color: #00796b;  /* Always green */
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
         }
 
         .container {
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 15px;
+            padding: 20px;
         }
 
-        section {
+        .form-section, .countdown-section, .duas-section, .support-section {
+            margin: 20px auto;
             background: var(--section-bg);
             padding: 20px;
-            margin: 20px 0;
             border-radius: 8px;
-            box-shadow: var(--box-shadow);
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        section h2 {
-            color: var(--header-color);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 12px;
+        .form-section input {
+            width: calc(100% - 20px);
+            padding: 10px;
             margin: 10px 0;
-            font-size: 16px;
-            border: none;
+            border: 1px solid var(--input-border);
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        input {
-            border: 1px solid #ccc;
-            background: #f9f9f9;
+            font-size: 16px;
+            background-color: var(--input-bg);
         }
 
         button {
-            background-color: var(--button-bg);
-            color: var(--button-text);
+            background-color: #00796b;  /* Always green */
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            width: calc(100% - 20px);
         }
 
         button:hover {
@@ -90,199 +87,231 @@
         }
 
         #countdown {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            text-align: center;
         }
 
         #dua {
-            color: var(--dua-color);
             font-style: italic;
-            line-height: 1.6;
+            color: var(--dua-color);
         }
 
+        footer {
+            margin-top: 20px;
+            background-color: #00796b;  /* Always green */
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Dark Mode Styles */
+        [data-theme="dark"] {
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --section-bg: var(--section-bg-dark);
+            --button-bg: var(--button-bg-dark);
+            --button-text: var(--button-text-dark);
+            --dua-color: var(--dua-color-dark);
+            --input-bg: var(--input-bg-dark);
+            --input-border: var(--input-border-dark);
+        }
+
+        /* Dark Mode Toggle Button */
         .dark-mode-toggle {
             position: fixed;
             top: 15px;
             right: 15px;
-            background: var(--header-color);
-            color: #ffffff;
-            border: none;
-            padding: 6px 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #00796b; /* Green color */
+            color: white;
+            border: 2px solid #ddd;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 18px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .dark-mode-toggle:hover {
-            background: #003d33;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
-        footer {
-            text-align: center;
-            background: var(--header-color);
-            color: #ffffff;
-            padding: 10px;
-            font-size: 0.9rem;
+        .dark-mode-toggle i {
+            pointer-events: none;
         }
 
+        /* Text Style like URL text */
+        a {
+            color: #5A5A5A; /* Dark Grey color */
+            text-decoration: underline;
+        }
+
+        /* Change Phone Number Color to Grey */
+        .phone-number {
+            color: #808080; /* Grey color */
+        }
+
+        /* Responsive Design for Mobile */
         @media screen and (max-width: 600px) {
             header h1 {
                 font-size: 1.5rem;
             }
 
-            #countdown {
-                font-size: 1.4rem;
+            .form-section, .countdown-section, .duas-section, .support-section {
+                padding: 15px;
+                margin: 10px;
             }
 
-            section h2 {
-                font-size: 1.3rem;
-            }
-
-            input, button {
+            .form-section input, button {
                 font-size: 14px;
-                padding: 10px;
+            }
+
+            #countdown {
+                font-size: 1.5rem;
             }
 
             footer {
                 font-size: 0.8rem;
             }
         }
-
-        @media screen and (max-width: 400px) {
-            header h1 {
-                font-size: 1.2rem;
-            }
-
-            #countdown {
-                font-size: 1.2rem;
-            }
-
-            section h2 {
-                font-size: 1.2rem;
-            }
-
-            input, button {
-                font-size: 13px;
-                padding: 8px;
-            }
-
-            footer {
-                font-size: 0.7rem;
-            }
-        }
-
-        /* Dark Mode Styles */
-        body[data-theme="dark"] {
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-        }
-
-        body[data-theme="dark"] section {
-            background: var(--section-bg-dark);
-        }
-
-        body[data-theme="dark"] #dua {
-            color: var(--dua-color-dark);
-        }
     </style>
 </head>
 <body>
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i id="toggle-icon">🌙</i>
+    </button>
+    <!-- Background Audio -->
     <audio id="birthdaySong" autoplay loop>
         <source src="birthday_song.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    <header>
-        <h1>Islamic Birthday Wishes & Countdown</h1>
-        <p>Made by Zainuddin Chaudhary</p>
-    </header>
+
     <div class="container">
-        <section>
-            <h2>Enter Your Details</h2>
+        <header>
+            <h1>Islamic Birthday Wishes And Countdown</h1>
+            <p>Made by Zainuddin Chaudhary</p>
+        </header>
+
+        <!-- Birthday Input Form -->
+        <section class="form-section">
             <form id="birthdayForm">
+                <label for="name">Your Name:</label>
                 <input type="text" id="name" placeholder="Enter your name" required>
+                
+                <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" required>
+
                 <button type="submit">Submit</button>
             </form>
         </section>
-        <section>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
             <h2>Next Birthday Countdown</h2>
-            <div id="countdown">00d 00h 00m 00s</div>
+            <div id="countdown">00:00:00</div>
         </section>
-        <section>
-            <h2>Special Dua for You</h2>
-            <p id="dua">Enter your details to receive a personalized dua!</p>
+
+        <!-- Duas Section -->
+        <section class="duas-section">
+            <h2>Special Duas for You</h2>
+            <p id="dua"></p>
         </section>
+
+        <!-- Support Section -->
+        <section class="support-section">
+            <h2>Support</h2>
+            <p>If you have any issues, please contact us via WhatsApp: <span class="phone-number"><a href="https://wa.me/9152667967">9152667967</a></span></p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Copyright © CHAUDHARY TECH 2024</p>
+        </footer>
     </div>
-    <footer>
-        <p>Copyright © 2024 CHAUDHARY TECH</p>
-    </footer>
 
     <script>
+        // Dark Mode Toggle Function
         function toggleDarkMode() {
-            const theme = document.body.getAttribute("data-theme");
-            document.body.setAttribute("data-theme", theme === "dark" ? "" : "dark");
+            const currentTheme = document.body.getAttribute("data-theme");
+            if (currentTheme === "dark") {
+                document.body.removeAttribute("data-theme");
+                document.getElementById("toggle-icon").textContent = "🌙"; // Moon icon
+            } else {
+                document.body.setAttribute("data-theme", "dark");
+                document.getElementById("toggle-icon").textContent = "🌞"; // Sun icon
+            }
         }
 
+        // Ensure audio plays continuously
+        const audio = document.getElementById("birthdaySong");
+
+        // Start playing audio when the page loads
+        window.onload = function() {
+            audio.play().catch(function(error) {
+                console.log('Audio playback failed: ' + error);
+            });
+        };
+
+        // Handle form submission and countdown logic
         document.getElementById("birthdayForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const name = document.getElementById("name").value;
-            const dob = new Date(document.getElementById("dob").value);
+            const dob = document.getElementById("dob").value;
 
+            // Display Duas with Name
             const duas = [
-                `May Allah bless you, ${name}, with endless happiness and prosperity. May He grant you success in this life and the next. May your heart always find peace in His remembrance.`,
-                `May Allah grant you wisdom and understanding, ${name}. May He guide you to the straight path and protect you from harm. May your life be filled with joy and contentment.`,
-                `May Allah fill your heart, ${name}, with His love and mercy. May He make your path easy and bring you closer to Him every day. May you always be a source of light to others.`,
-                `May Allah grant you health, wealth, and happiness, ${name}. May you find success in your endeavors and may His protection be with you always. May you be surrounded by those who love and cherish you.`,
-                `May Allah bless your family with peace and harmony, ${name}. May He protect them from all harm and grant them His guidance. May your home be filled with joy and prosperity.`,
-                `May Allah grant you patience and strength, ${name}, in all your trials. May He ease your hardships and reward you with the best of this world and the next. May you always find comfort in His words.`,
-                `May Allah shower His mercy upon you, ${name}, and grant you a life of tranquility. May He guide your heart to be always content with His will. May you find peace in His remembrance.`,
-                `May Allah bless you with a long, healthy life, ${name}. May He keep you safe from harm and fill your life with His light. May your journey be filled with peace, prosperity, and joy.`,
-                `May Allah grant you a heart full of gratitude, ${name}. May you always find blessings in every moment. May He grant you success in every endeavor, big or small.`,
-                `May Allah’s mercy be with you, ${name}, in all your undertakings. May He make your life prosperous and full of peace. May you always remain on the path of righteousness.`,
-                `May Allah answer all your prayers, ${name}, and grant you the best of both worlds. May He protect you from every harm and bless you with unending peace. May you always remain steadfast in faith.`,
-                `May Allah grant you wisdom, ${name}, to navigate the challenges of life. May He give you the strength to stay true to your beliefs. May you always find success in His will.`,
-                `May Allah's protection surround you always, ${name}. May He guide you in all your endeavors and bless you with endless prosperity. May your faith in Him grow stronger with each passing day.`,
-                `May Allah fill your life with peace, ${name}. May He guide you to success in every step you take. May you always remain under His guidance and protection.`,
-                `May Allah bless you with love, ${name}. May He bring peace to your heart and guide you in your life’s journey. May you always remain in His care and protection.`,
-                `May Allah grant you endless opportunities, ${name}, to grow and succeed. May He open doors of blessings for you, and may you walk on the path of righteousness.`,
-                `May Allah keep you on the right path, ${name}. May He protect you from distractions and grant you clarity of thought and purpose. May your heart always remain strong in His faith.`,
-                `May Allah bless your work, ${name}, with success. May He open doors of opportunity and grant you prosperity in all your efforts. May you always be grateful for His blessings.`,
-                `May Allah grant you strength, ${name}, to face every challenge. May He provide you with peace of mind and tranquility. May you always remember Him in both times of ease and difficulty.`,
-                `May Allah grant you happiness, ${name}, in this world and the hereafter. May He fill your heart with His love and protect you from every harm. May you always be in His care.`,
-                `May Allah grant you success in your studies, ${name}. May He guide you in your pursuit of knowledge. May you always find clarity and understanding in His guidance.`,
-                `May Allah’s blessings be upon you, ${name}. May He grant you peace, joy, and success in all areas of your life. May your heart always find comfort in His presence.`,
-                `May Allah grant you tranquility, ${name}. May He protect you from every hardship and bring you success in every aspect of your life. May you always be surrounded by His love.`,
-                `May Allah guide you, ${name}, to the best of actions. May He bless your efforts and grant you success in both this life and the hereafter. May you always find peace in His remembrance.`
+                `May Allah bless you, ${name}, with a long, prosperous, and healthy life.`,
+                `May this special day bring you, ${name}, success in this life and the hereafter.`,
+                `May Allah grant you, ${name}, wisdom and happiness.`,
+                `May Allah forgive your sins, ${name}, and grant you peace of mind.`,
+                `May Allah make all your dreams and wishes come true, ${name}.`,
+                `May your heart always be filled with joy, ${name}.`,
+                `May you always be guided on the right path, ${name}.`,
+                `May Allah’s blessings always shine upon you, ${name}.`,
+                `May you experience success in this life and the next, ${name}.`,
+                `May your faith always be strong, ${name}, and your heart always be content.`,
+                `May Allah protect your family and loved ones, ${name}.`,
+                `May Allah grant you peace and serenity, ${name}, in every moment.`,
+                `May you continue to grow in knowledge and faith, ${name}.`,
+                `May your days be filled with blessings, ${name}, now and always.`,
+                `May you always find joy in the simple things, ${name}.`,
+                `May Allah keep you safe from harm, ${name}.`,
+                `May you have endless happiness and success, ${name}.`,
+                `May your life be filled with love and light, ${name}.`,
+                `May Allah make all your good intentions come true, ${name}.`,
+                `May you always find strength and patience in life, ${name}.`
             ];
 
-            const randomIndex = Math.floor(Math.random() * duas.length);
-            document.getElementById("dua").innerText = duas[randomIndex];
+            const randomDua = duas[Math.floor(Math.random() * duas.length)];
+            document.getElementById("dua").innerText = randomDua;
 
-            const nextBirthday = new Date(dob);
-            nextBirthday.setFullYear(new Date().getFullYear());
+            // Countdown logic
+            const birthday = new Date(dob);
+            const currentYear = new Date().getFullYear();
 
-            if (nextBirthday < new Date()) {
-                nextBirthday.setFullYear(new Date().getFullYear() + 1);
+            // Set the next birthday to the current year or next year if the birthday has passed
+            if (birthday.setFullYear(currentYear) < new Date()) {
+                birthday.setFullYear(currentYear + 1);
             }
 
-            const countdownInterval = setInterval(() => {
-                const now = new Date();
-                const timeDifference = nextBirthday - now;
-
-                if (timeDifference <= 0) {
+            const countdownInterval = setInterval(function() {
+                const diff = birthday - new Date();
+                if (diff <= 0) {
                     clearInterval(countdownInterval);
                     document.getElementById("countdown").innerText = "Happy Birthday!";
                     return;
                 }
 
-                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
                 document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
             }, 1000);
