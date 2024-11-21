@@ -34,7 +34,7 @@
         header {
             background-color: var(--header-color);
             color: #ffffff;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             box-shadow: var(--box-shadow);
         }
@@ -45,9 +45,9 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 100%;
             margin: 20px auto;
-            padding: 10px;
+            padding: 15px;
         }
 
         section {
@@ -61,10 +61,11 @@
         section h2 {
             color: var(--header-color);
             margin-bottom: 15px;
+            font-size: 1.5rem;
         }
 
         input, button {
-            width: calc(100% - 20px);
+            width: 100%;
             padding: 12px;
             margin: 10px 0;
             font-size: 16px;
@@ -89,8 +90,9 @@
         }
 
         #countdown {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
+            text-align: center;
         }
 
         #dua {
@@ -117,6 +119,7 @@
             background: var(--header-color);
             color: #ffffff;
             padding: 10px;
+            font-size: 0.9rem;
         }
 
         @media screen and (max-width: 600px) {
@@ -125,7 +128,43 @@
             }
 
             #countdown {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            section h2 {
+                font-size: 1.3rem;
+            }
+
+            input, button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            #countdown {
+                font-size: 1.2rem;
+            }
+
+            section h2 {
+                font-size: 1.2rem;
+            }
+
+            input, button {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            footer {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -216,35 +255,33 @@
                 `May Allah make you successful, ${name}, in this world and the hereafter. 
                 May He fill your heart with peace and contentment.`,
                 `May Allah keep your heart soft and full of iman, ${name}. 
-                May He guide you to make the best choices in life.`,
-                `May Allah surround you, ${name}, with sincere and loving friends. 
-                May He bless you with positive company and good character.`,
-                `May Allah bless your intentions, ${name}, and make them fruitful. 
-                May He guide you in every aspect of your life.`,
-                `May Allah fill your life, ${name}, with light and hope. 
-                May He keep your heart connected to His remembrance.`,
+                May He guide you to what is best for you.`,
+                `May Allah's light always shine upon you, ${name}. 
+                May He make every path you take one of success and happiness.`
             ];
 
-            const randomDua = duas[Math.floor(Math.random() * duas.length)];
-            document.getElementById("dua").innerText = randomDua;
-
-            const now = new Date();
-            dob.setFullYear(now.getFullYear());
-            if (dob < now) dob.setFullYear(now.getFullYear() + 1);
-
-            setInterval(() => {
-                const diff = dob - new Date();
+            // Display the countdown
+            setInterval(function() {
+                const now = new Date();
+                let nextBirthday = new Date(dob);
+                nextBirthday.setFullYear(now.getFullYear());
+                if (nextBirthday < now) nextBirthday.setFullYear(now.getFullYear() + 1);
+                const diff = nextBirthday - now;
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
                 document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
             }, 1000);
-        });
 
-        document.addEventListener("click", function() {
-            const audio = document.getElementById("birthdaySong");
-            if (audio.paused) audio.play();
+            // Display a dua
+            document.getElementById("dua").innerText = duas[Math.floor(Math.random() * duas.length)];
+
+            // Fix audio play
+            document.addEventListener("click", function() {
+                const audio = document.getElementById("birthdaySong");
+                if (audio.paused) audio.play();
+            });
         });
     </script>
 </body>
