@@ -1,420 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events Calendar by Testing17741</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unlock Secret File</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+    }
 
-        h1, h2 {
-            text-align: center;
-            color: #444;
-        }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    h1 {
+      color: #333;
+    }
 
-        .hidden {
-            display: none;
-        }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
 
-        .calendar-header, .buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
-        }
+    button {
+      background: #ff7e5f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-        .calendar-header button, .buttons button {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background: #fcb69f;
-            color: #fff;
-            transition: background 0.3s ease;
-        }
+    button:hover {
+      background: #feb47b;
+    }
 
-        .calendar-header button:hover, .buttons button:hover {
-            background: #ff9966;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            text-align: center;
-        }
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .day {
-            padding: 10px;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: pointer;
-            position: relative;
-            transition: background 0.3s ease;
-        }
+    .embed-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      box-shadow: 0 2px 8px 0 rgba(63, 69, 81, 0.16);
+      margin-top: 1.6em;
+      margin-bottom: 0.9em;
+      overflow: hidden;
+      border-radius: 8px;
+      will-change: transform;
+    }
 
-        .day:hover {
-            background: #fcb69f;
-            color: #fff;
-        }
-
-        .day.current-day {
-            background: #fcb69f;
-            color: #fff;
-        }
-
-        .event-popup, .all-events, .analysis-section, .search-section {
-            display: none;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-        }
-
-        .event-popup.active, .all-events.active, .analysis-section.active, .search-section.active {
-            display: block;
-        }
-
-        input[type="text"], input[type="time"], select {
-            padding: 10px;
-            margin: 10px 0;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #888;
-        }
-
-        @media (max-width: 600px) {
-            .calendar {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-    </style>
+    #error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Events Calendar</h1>
-
-        <!-- User Authentication Section -->
-        <div class="user-section" id="userSection">
-            <h2>Login</h2>
-            <input type="text" id="username" placeholder="Enter Username">
-            <input type="password" id="password" placeholder="Enter Password">
-            <button onclick="loginUser()">Login</button>
-            <button onclick="showRegisterForm()">Register</button>
-        </div>
-
-        <!-- Registration Section -->
-        <div class="registration-section hidden" id="registrationSection">
-            <h2>Register New Account</h2>
-            <input type="text" id="newUsername" placeholder="Choose Username">
-            <input type="password" id="newPassword" placeholder="Choose Password">
-            <button onclick="registerUser()">Register</button>
-            <button onclick="hideRegisterForm()">Cancel</button>
-        </div>
-
-        <!-- Search Section -->
-        <div class="search-section" id="searchSection">
-            <h2>Search Events</h2>
-            <input type="text" id="searchInput" placeholder="Search by event details or date">
-            <button onclick="searchEvents()">Search</button>
-        </div>
-
-        <!-- Calendar Section -->
-        <div id="calendarSection" class="hidden">
-            <div class="calendar-header">
-                <button onclick="prevMonth()">&#9664; Previous</button>
-                <span id="dateDisplay"></span>
-                <button onclick="nextMonth()">Next &#9654;</button>
-            </div>
-            <div class="calendar" id="calendar"></div>
-
-            <div class="buttons">
-                <button onclick="showAllEvents()">Show All Events</button>
-                <button onclick="analyzeEvents()">Analyze Events</button>
-            </div>
-        </div>
-
-        <!-- Event Popup -->
-        <div class="event-popup" id="eventPopup">
-            <h3>Add Event</h3>
-            <p id="eventDate"></p>
-            <input type="text" id="eventInput" placeholder="Event Details">
-            <input type="time" id="eventTime">
-            <select id="eventPriority">
-                <option value="Low">Low Priority</option>
-                <option value="Medium">Medium Priority</option>
-                <option value="High">High Priority</option>
-            </select>
-            <button onclick="saveEvent()">Save Event</button>
-            <button onclick="closePopup()">Close</button>
-        </div>
-
-        <!-- All Events Section -->
-        <div class="all-events" id="allEventsSection">
-            <h3>All Events</h3>
-            <ul id="allEventsList"></ul>
-            <button onclick="closeAllEvents()">Close</button>
-        </div>
-
-        <!-- Analysis Section -->
-        <div class="analysis-section" id="analysisSection">
-            <h3>Event Analysis</h3>
-            <ul id="analysisList"></ul>
-            <button onclick="closeAnalysis()">Close</button>
-        </div>
-
-        <footer>&copy; 2024 Events Calendar. All rights reserved.</footer>
-
+  <div class="container">
+    <h1>Unlock Secret File</h1>
+    <p>Enter the password to view the design:</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="unlockImage()">Unlock</button>
+    <div id="image-container" class="hidden">
+      <!-- Canva embed -->
+      <div class="embed-container">
+        <iframe 
+          loading="lazy" 
+          src="https://www.canva.com/design/DAGZEzGqpio/_ylQpVOm3mrKJMqBVi5ohg/view?embed" 
+          allowfullscreen="allowfullscreen" 
+          allow="fullscreen">
+        </iframe>
+      </div>
+      <a href="https://www.canva.com/design/DAGZEzGqpio/_ylQpVOm3mrKJMqBVi5ohg/view?utm_content=DAGZEzGqpio&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Rehan’s wife</a> by Rehan Ansari
     </div>
+    <p id="error-message"></p>
+  </div>
 
-    <script>
-        let currentUser = null;
-        let events = {};
-        let currentDate = new Date();
-        let users = JSON.parse(localStorage.getItem('users')) || {};
-        
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const newUsernameInput = document.getElementById('newUsername');
-        const newPasswordInput = document.getElementById('newPassword');
-        const userSection = document.getElementById('userSection');
-        const registrationSection = document.getElementById('registrationSection');
-        const calendarSection = document.getElementById('calendarSection');
-        const eventPopup = document.getElementById('eventPopup');
-        const allEventsSection = document.getElementById('allEventsSection');
-        const analysisSection = document.getElementById('analysisSection');
-        const searchSection = document.getElementById('searchSection');
-        const allEventsList = document.getElementById('allEventsList');
-        const analysisList = document.getElementById('analysisList');
-        const eventDate = document.getElementById('eventDate');
-        const eventInput = document.getElementById('eventInput');
-        const eventTime = document.getElementById('eventTime');
-        const eventPriority = document.getElementById('eventPriority');
-        const dateDisplay = document.getElementById('dateDisplay');
-        const searchInput = document.getElementById('searchInput');
+  <script>
+    function unlockImage() {
+      const password = document.getElementById('password').value;
+      const correctPassword = "pinkELEP67"; // Change this to your desired password
+      const imageContainer = document.getElementById('image-container');
+      const errorMessage = document.getElementById('error-message');
 
-        function loginUser() {
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            if (!username || !password) {
-                alert('Please enter both username and password');
-                return;
-            }
-
-            const user = users[username];
-            if (user && user.password === password) {
-                currentUser = username;
-                events = user.events || {};
-                userSection.classList.add('hidden');
-                searchSection.classList.remove('hidden');
-                calendarSection.classList.remove('hidden');
-                updateCalendar();
-                updateTime();
-            } else {
-                alert('Incorrect username or password');
-            }
-        }
-
-        function showRegisterForm() {
-            userSection.classList.add('hidden');
-            registrationSection.classList.remove('hidden');
-        }
-
-        function hideRegisterForm() {
-            registrationSection.classList.add('hidden');
-            userSection.classList.remove('hidden');
-        }
-
-        function registerUser() {
-            const username = newUsernameInput.value.trim();
-            const password = newPasswordInput.value.trim();
-
-            if (!username || !password) {
-                alert('Please enter both username and password');
-                return;
-            }
-
-            if (users[username]) {
-                alert('Username already taken');
-                return;
-            }
-
-            users[username] = { password, events: {} };
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Registration successful!');
-            hideRegisterForm();
-        }
-
-        function updateCalendar() {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            dateDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
-
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-            calendar.innerHTML = '';
-
-            daysOfWeek.forEach(day => {
-                const dayHeader = document.createElement('div');
-                dayHeader.className = 'day';
-                dayHeader.textContent = day;
-                calendar.appendChild(dayHeader);
-            });
-
-            for (let i = 0; i < firstDay; i++) {
-                calendar.innerHTML += '<div></div>';
-            }
-
-            for (let i = 1; i <= daysInMonth; i++) {
-                const day = document.createElement('div');
-                day.className = 'day';
-                day.textContent = i;
-                day.onclick = () => openPopup(i);
-                const dateKey = `${year}-${month + 1}-${i}`;
-                if (events[dateKey]) {
-                    day.classList.add('has-event');
-                }
-                calendar.appendChild(day);
-            }
-        }
-
-        function prevMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            updateCalendar();
-        }
-
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            updateCalendar();
-        }
-
-        function openPopup(day) {
-            const date = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${day}`;
-            eventDate.textContent = `Events for ${date}`;
-            eventPopup.classList.add('active');
-        }
-
-        function closePopup() {
-            eventPopup.classList.remove('active');
-        }
-
-        function saveEvent() {
-            const date = eventDate.textContent.replace('Events for ', '');
-            const time = eventTime.value;
-            const priority = eventPriority.value;
-            const eventDetails = eventInput.value;
-
-            if (!eventDetails || !time) {
-                alert('Please provide event details and time');
-                return;
-            }
-
-            if (!events[date]) events[date] = [];
-            events[date].push({ eventDetails, time, priority });
-            users[currentUser].events = events;
-            localStorage.setItem('users', JSON.stringify(users));
-            closePopup();
-        }
-
-        function showAllEvents() {
-            allEventsList.innerHTML = '';
-            for (const date in events) {
-                events[date].forEach((event, index) => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${index + 1}. </strong> ${event.eventDetails} (Time: ${event.time}, Priority: ${event.priority}) <button onclick="deleteEvent('${date}', ${index})">Delete</button>`;
-                    allEventsList.appendChild(li);
-                });
-            }
-            allEventsSection.classList.add('active');
-        }
-
-        function deleteEvent(date, index) {
-            events[date].splice(index, 1);
-            if (events[date].length === 0) {
-                delete events[date];
-            }
-            users[currentUser].events = events;
-            localStorage.setItem('users', JSON.stringify(users));
-            showAllEvents(); // Refresh the event list
-        }
-
-        function closeAllEvents() {
-            allEventsSection.classList.remove('active');
-        }
-
-        function analyzeEvents() {
-            analysisList.innerHTML = '';
-            for (const date in events) {
-                events[date].forEach(event => {
-                    const li = document.createElement('li');
-                    li.textContent = `${date}: ${event.eventDetails} - Time: ${event.time} - Priority: ${event.priority}`;
-                    analysisList.appendChild(li);
-                });
-            }
-            analysisSection.classList.add('active');
-        }
-
-        function closeAnalysis() {
-            analysisSection.classList.remove('active');
-        }
-
-        function searchEvents() {
-            const query = searchInput.value.trim().toLowerCase();
-            if (!query) return;
-
-            const searchResults = [];
-            for (const date in events) {
-                events[date].forEach(event => {
-                    if (event.eventDetails.toLowerCase().includes(query)) {
-                        searchResults.push(`${date}: ${event.eventDetails} (Time: ${event.time}, Priority: ${event.priority})`);
-                    }
-                });
-            }
-
-            searchSection.innerHTML = searchResults.length ? `<h3>Search Results:</h3><ul><li>${searchResults.join('</li><li>')}</li></ul>` : '<h3>No results found.</h3>';
-        }
-
-        function updateTime() {
-            const timeDisplay = document.createElement('div');
-            timeDisplay.id = 'timeDisplay';
-            document.body.appendChild(timeDisplay);
-
-            function refreshTime() {
-                const now = new Date();
-                timeDisplay.textContent = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-            }
-
-            refreshTime();
-            setInterval(refreshTime, 1000);
-        }
-    </script>
+      if (password === correctPassword) {
+        imageContainer.classList.remove('hidden');
+        errorMessage.textContent = "";
+      } else {
+        errorMessage.textContent = "Incorrect password. Please try again.";
+        imageContainer.classList.add('hidden');
+      }
+    }
+  </script>
 </body>
 </html>
