@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Hasnain!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #b3e5fc;
+            font-style: italic;
+        }
+
+        .party-info {
+            font-size: 18px;
+            margin: 20px 0;
+            color: #80d8ff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0px 0px 10px #4fc3f7, 0px 0px 20px #4fc3f7;
+            }
+            to {
+                text-shadow: 0px 0px 20px #80d8ff, 0px 0px 30px #80d8ff;
+            }
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .countdown div {
+            width: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .countdown div:hover {
+            background: rgba(79, 195, 247, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .countdown div span {
+            display: block;
+            font-size: 16px;
+            color: #4fc3f7;
+            margin-top: 10px;
+        }
+
+        .countdown div .value {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .share-btn {
+            background-color: #4fc3f7;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background-color: #0288d1;
+            transform: scale(1.1);
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #b3e5fc;
+        }
+
+        footer span {
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            .countdown div {
+                width: 100px;
+                padding: 15px;
+            }
+
+            .share-btn {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .countdown div {
+                width: 80px;
+                font-size: 14px;
+            }
+
+            .share-btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday Hasnain!</h1>
+
+    <div class="party-info">🎉 Birthday Party: December 19, 2024 at 9:00 PM, Shabbir Seekh Paratha 🎉</div>
+
+    <!-- Short Dua Section -->
+    <div class="wishes">
+        <p style="font-size: 22px; color: #4fc3f7; font-weight: bold;">Dear Hasnain,</p>
+        <p style="font-size: 18px; color: #b3e5fc;">May Allah bless you with happiness, health, and success in both this world and the Hereafter. Ameen.</p>
+    </div>
+
+    <div class="countdown" id="countdown">
+        <div>
+            <div class="value" id="days">00</div>
+            <span>Days</span>
+        </div>
+        <div>
+            <div class="value" id="hours">00</div>
+            <span>Hours</span>
+        </div>
+        <div>
+            <div class="value" id="minutes">00</div>
+            <span>Minutes</span>
+        </div>
+        <div>
+            <div class="value" id="seconds">00</div>
+            <span>Seconds</span>
+        </div>
+    </div>
+
+    <button class="share-btn" onclick="shareBirthdayPage()">Share This Page</button>
+
+    <footer>
+        <p>Made with ❤️ by <span>Zainuddin Chaudhary</span></p>
+    </footer>
+
+    <script>
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const birthday = new Date('December 19, 2024 21:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = birthday - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById('countdown').innerHTML = "<h2>🎉 Happy Birthday! 🎉</h2>";
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // Share Page Logic
+        function shareBirthdayPage() {
+            const message = 'Celebrate Hasnain\'s birthday with this countdown page!';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Happy Birthday Hasnain!',
+                    text: message,
+                    url: window.location.href
+                }).catch(err => console.error('Sharing failed:', err));
+            } else {
+                alert('Sharing is not supported on your device.');
+            }
+        }
+    </script>
+</body>
+</html>
